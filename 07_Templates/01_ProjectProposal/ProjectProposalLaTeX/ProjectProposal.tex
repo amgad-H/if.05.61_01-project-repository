@@ -12,15 +12,9 @@
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \theoremstyle{definition}
-\newtheorem{example}{Example}
 
 \newtheorem{ourVersion}{ \linebreak}
 
-\newenvironment{explanation}{%
-   \setlength{\parindent}{0pt}
-   \itshape
-   \color{blue}
-}{}
 
 \newcommand{\projectname}{Schulplaner}
 \newcommand{\productname}{Education Planner}
@@ -79,11 +73,8 @@ we want to get a different school planer than the usual ones.
 
 \begin{ourVersion}
 Students already have an overview over their timetable by using Webuntis and they also can work with calendars where they can enter the next deadline-days, homework or other important things.
-But by working with two or more apps one could lose the overview very easily and it also could be very annoying to continually change the app for things that could be possible to use in just one app. \linebreak \linebreak
-Verbesserung: \linebreak
-Genauere Beschreibung der jetzigen Situation (was besser gemacht werden muss) \linebreak
-Was fehlt in den schon bestehenden Apps? Was werden wir ergänzen? \linebreak
-It can be used as a class- school planer (Ergänzung!!!) 
+But by working with two or more apps one could lose the overview very easily and it also could be very annoying to continually change the app for things that could be possible to use in just one app. 
+So whats missing is a easily usable app where you can work with all these features and where you have acces to all your important informations. Our app can also be used as a class-school planer where the whole class can work with one timetable. The idea is that one student can enter a homework to a subject and it will be shown to the whole class so it is comparable with substitutions of teacher. 
 \end{ourVersion}
 \pagebreak
 
@@ -92,16 +83,13 @@ It can be used as a class- school planer (Ergänzung!!!)
 \begin{ourVersion}
 The proposed system has to the deal with the following constraints: \linebreak
 
-Technical Constraints: \linebreak
+\subsection{Technical Constraints}
+The app should sync with Webuntis and also a backend is necessary to store common events (for the whole class) centrally. Therefore, a dedicated server which is available via the internet has to be installed. An extra feature that might be added is the ability to insert private events in your calendar.
+Further on, Webuntis, common class events and personal events have to be merged in one view which is going to be possible by saving those data on a cloud backup service. This way the user wont lose his private events in the case of losing or changing their device.
 
-The app should sync with Webuntis and also a
-backend is necessary to store common events (for the whole class) centrally.
-Further on, Webuntis, common class events and personal events have to be merged in one view. \linebreak
-
-Organisational Constraints: \linebreak
-Userdata (which userdata?) has to be encrypted. \linebreak
-
-How would this app be used by students?? (desktop version?)
+\subsection{Organisational Constraints}
+Userdata, which includes the login information for webuntis and the other events that get added, has to be encrypted.
+Our plan is for the app to be accessable only via mobile phone, because students use their phones to enter dates most of the time anyways. From our experience, phones are used more often throughout the day.
 
 \end{ourVersion}
 
@@ -110,16 +98,18 @@ How would this app be used by students?? (desktop version?)
 \section{Project Objectives and System Concepts}
 
 \begin{ourVersion}
-The project’s use case will usually be like this: \linebreak
-By opening the app the students can see first what they have to do in the next time by a pop up which covers the whole screen and
-the Webuntis-Sync helps them knowing when the next lessons are canceled.
+The project’s use case will usually be like this: 
+By opening the app the students can see first what they have to do in the next time by a pop up which covers the whole screen.
+The Webuntis-Sync helps them plan their whole week or month more easily and by including the timetable, they also would have a much better overview over the canceled hours or the coming school events.
+
 They also can enter their Homework to its respective subject and schedule.
 By this, they can easily see if they have homework to do or not, and when a subject is chosen a more informative window will pop up showing exactly what the homework is.
-Students also have a clear overview of the next weeks or months. \linebreak
-Our plan is to be able to work with all these features in our app, so students can plan their whole week or month more easily and by including the timetable, they also would have a much better overview over the canceled hours or the coming school events.
-Homeworks and Tests shall be visually emphasized to remind the user of upcoming dead-lines. \linebreak
-Bilder als Beispiele!!!
-Wie wird auf die Server zugegriffen??
+
+There will be two views. The monthly-view, which will show a clearer overview of project timespans and duedates, and the weekly-view will show the timetable and the homeworks for each subject, this will be visually emphasized. 
+
+\begin{center}
+\includegraphics[scale=0.13]{AppBlueprint.jpeg}
+\end{center}
 
 \end{ourVersion}
 
@@ -127,13 +117,13 @@ Wie wird auf die Server zugegriffen??
 \section{Opportunities and Risks}
 
  \begin{ourVersion}
-The project’s opportunities are: \linebreak
-Wieso wollen wir diese App entwickeln? \linebreak
-Students won’t overlook homework and our app could reduce stress since the dates won’t be scattered around in various apps \linebreak	
 
-Risks to consider: \linebreak
-Was wären probleme bei der Entwicklung?\linebreak
-Student may forget to enter their homework and also if class is split up, homework could be different.
+The project’s opportunities are:
+
+From our own experience, we noticed that keeping count of all the homeworks, deadlines and private events could get out of hands and many students start to fall behind. Keeping all the due dates at one spot will aid and motivate students on doing their assignments on time and get stuff done! 
+
+Risks to consider: 
+Student may forget to enter their homework and also if class is split up, homework could be different. The data must be encrypted before it is uploaded to the cloud.
 	
  \end{ourVersion}
 
