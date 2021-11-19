@@ -25,23 +25,28 @@ public class RomanNumberConverter {
 
     public static int toArabic(String roman) {
         int arabic = 0;
+        int romanLength = roman.length();
 
-        if(roman == "V") {
-            arabic += 5;
-        }
-        if(roman == "IV") {
-            arabic += 4;
-        }
-        if(roman == "III") {
-            arabic += 3;
-        }
-        if(roman == "II") {
-            arabic += 2;
-        }
-        if(roman == "I") {
-            arabic += 1;
-        }
+        for (int i = 0; i < romanLength ; i++){
 
+
+            for(var num : Numeral.values()){
+                char firstRomanChar = roman.charAt(i);;
+                char secondRomanChar = 0;
+                if (i < romanLength-1){
+                    firstRomanChar = roman.charAt(i);
+                    secondRomanChar = roman.charAt(i+1);
+                    if((Character.toString(firstRomanChar) + Character.toString(secondRomanChar)).equals(num.mRoman)){
+                        arabic += num.mArabic;
+                        i++;
+                    }
+                }
+
+                if(Character.toString(firstRomanChar).equals(num.mRoman)){
+                    arabic += num.mArabic;
+                }
+            }
+        }
         return arabic;
     }
 
