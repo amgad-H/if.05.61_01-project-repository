@@ -55,6 +55,8 @@ public class RomanNumberConverterTest {
         assertEquals("IX", RomanNumberConverter.toRoman(9));
     }
 
+
+
     @Test
     public void itShouldReturn1_GivenI(){
         assertEquals(1, RomanNumberConverter.toArabic("I"));
@@ -79,5 +81,27 @@ public class RomanNumberConverterTest {
     public void itShouldReturn5_GivenV(){
         assertEquals(5, RomanNumberConverter.toArabic("V"));
     }
+
+    @Test
+    public void itShouldReturn6And7_GivenVIAndVII(){
+        assertEquals(6, RomanNumberConverter.toArabic("VI"));
+        assertEquals(7, RomanNumberConverter.toArabic("VII"));
+    }
+
+    @Test
+    public void itShouldReturn10_GivenX(){
+        assertEquals(10, RomanNumberConverter.toArabic("X"));
+    }
+
+    @Test
+    public void itShouldReturn21_GivenXXI(){
+        assertEquals(21, RomanNumberConverter.toArabic("XXI"));
+    }
+
+    @Test
+    public void itShouldReturn9_GivenIX(){
+        assertEquals(9, RomanNumberConverter.toArabic("IX"));
+    }
+
 
 }
