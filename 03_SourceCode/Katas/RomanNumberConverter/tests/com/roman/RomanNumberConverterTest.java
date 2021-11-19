@@ -13,7 +13,6 @@ public class RomanNumberConverterTest {
     @Test
     public void itShouldReturnII_Given2() {
         assertEquals("II", RomanNumberConverter.toRoman(2));
-
     }
 
     @Test
