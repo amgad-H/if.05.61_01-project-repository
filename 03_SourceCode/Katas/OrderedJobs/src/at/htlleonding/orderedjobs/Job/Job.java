@@ -8,7 +8,7 @@
  * Description:
  * ----------------------------------------------------------
  */
-package at.htlleonding.orderedjobs;
+package at.htlleonding.orderedjobs.Job;
 
 public class Job{
     private String mName;
