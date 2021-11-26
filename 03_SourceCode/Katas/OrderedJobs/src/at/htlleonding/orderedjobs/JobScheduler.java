@@ -20,7 +20,7 @@ public class JobScheduler {
 
     public void registerJob(String jobName) {
         Job job = new Job(jobName);
-        if(!mJobs.contains(job)){
+        if(!containsJob(job)){
             mJobs.add(job);
         }
     }
@@ -30,17 +30,30 @@ public class JobScheduler {
     }
 
     public String getList() {
-        return mJobs;
+        String jobs = "";
+        for(Job job : mJobs){
+            jobs += job.getName();
+        }
+        return jobs;
+    }
+
+    public boolean containsJob(Job job){
+        boolean doesContain = false;
+
+        for(Job j : mJobs){
+            doesContain = j.getName() == job.getName() ? true : false;
+        }
+        return doesContain;
     }
 
     public void registerJob(String dependent, String independent) {
         Job job = new Job(independent);
-        if(!mJobs.contains(job)){
+        if(!containsJob(job)){
             mJobs.add(job);
         }
 
         Job job2 = new Job(dependent, job);
-        if(!mJobs.contains(job2)){
+        if(!containsJob(job2)){
             mJobs.add(job2);
         }
     }
