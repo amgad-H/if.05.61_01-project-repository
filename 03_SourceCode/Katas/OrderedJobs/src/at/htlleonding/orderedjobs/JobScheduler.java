@@ -10,9 +10,7 @@
  */
 package at.htlleonding.orderedjobs;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class JobScheduler {
 
@@ -26,10 +24,25 @@ public class JobScheduler {
     }
 
     public void sort() {
+        bubbleSort();
+    }
+    public void bubbleSort() {
+        int n = mJobs.size();
+        Job temp = null;
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < (n - i); j++) {
+                if (mJobs.get(j-1).getName().compareTo(mJobs.get(j).getName()) == 1) {
+                    //swap elements
+                    temp = mJobs.get(j-1);
+                    mJobs.set(j-1, mJobs.get(j));
+                    mJobs.set(j, temp);
+                }
 
+            }
+        }
     }
 
-    public String getList() {
+        public String getList() {
         String jobs = "";
         for(Job job : mJobs){
             jobs += job.getName();
@@ -41,7 +54,7 @@ public class JobScheduler {
         boolean doesContain = false;
 
         for(Job j : mJobs){
-            doesContain = j.getName() == job.getName() ? true : false;
+            if(j.getName() == job.getName()) doesContain = true;
         }
         return doesContain;
     }
