@@ -71,4 +71,22 @@ public class Job {
 
         return changed;
     }
+
+    public void bubbleSort() {
+        if(listOfDependants != null){
+            int n = listOfDependants.size();
+            Job temp = null;
+            for (int i = 0; i < n; i++) {
+                for (int j = 1; j < (n - i); j++) {
+                    if (listOfDependants.get(j-1).getName().compareTo(listOfDependants.get(j).getName()) == 1) {
+                        //swap elements
+                        temp = listOfDependants.get(j-1);
+                        listOfDependants.set(j-1, listOfDependants.get(j));
+                        listOfDependants.set(j, temp);
+                    }
+
+                }
+            }
+        }
+    }
 }

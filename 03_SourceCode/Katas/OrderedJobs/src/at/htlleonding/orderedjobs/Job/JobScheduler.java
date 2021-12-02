@@ -24,23 +24,11 @@ public class JobScheduler {
     }
 
     public void sort() {
-
-    }
-    public void bubbleSort() {
-        int n = mJobs.size();
-        Job temp = null;
-        for (int i = 0; i < n; i++) {
-            for (int j = 1; j < (n - i); j++) {
-                if (mJobs.get(j-1).getName().compareTo(mJobs.get(j).getName()) == 1) {
-                    //swap elements
-                    temp = mJobs.get(j-1);
-                    mJobs.set(j-1, mJobs.get(j));
-                    mJobs.set(j, temp);
-                }
-
-            }
+        for(Job j : mJobs){
+            j.bubbleSort();
         }
     }
+
 
         public String getList() {
         String jobs = "";
