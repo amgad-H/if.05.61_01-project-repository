@@ -111,4 +111,19 @@ class JobSchedulerTests {
 
         assertEquals("BACDEF", sut.getList());
     }
+
+    @Test
+    public void itShouldReturnBACDEF_GivenB_andA_andEdependantOnF_andFdependantOnC_andCdependantOnD_andDdependantOnA(){
+        var sut = new JobScheduler();
+        sut.registerJob("B");
+        sut.registerJob("A");
+        sut.registerJob("E", "F");
+        sut.registerJob("F", "C");
+        sut.registerJob("C", "D");
+        sut.registerJob("D", "A");
+
+        sut.sort();
+
+        assertEquals("BACDEF", sut.getList());
+    }
 }
