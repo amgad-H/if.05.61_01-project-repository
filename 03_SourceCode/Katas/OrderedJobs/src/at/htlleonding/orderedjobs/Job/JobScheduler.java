@@ -79,6 +79,13 @@ public class JobScheduler {
             }
             mJobs.add(job);
         }
+        else {
+            for(Job j : mJobs){
+                if(job.getName() == j.getName()){
+                    job = j;
+                }
+            }
+        }
 
         Job job2 = new Job(dependent);
         job.addDependantJob(job2);

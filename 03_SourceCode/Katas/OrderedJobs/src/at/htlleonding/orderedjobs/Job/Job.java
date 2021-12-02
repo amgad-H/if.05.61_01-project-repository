@@ -38,9 +38,11 @@ public class Job {
             listOfDependants.add(dependantJob);
         }
         if(dependantJob.getDependency() != null){
-            for(Job j : dependantJob.getDependency()){
-                listOfDependants.add(j);
-                dependantJob.listOfDependants.remove(j);
+            int depJobsSize = dependantJob.getDependency().size();
+            for(int i = 0; i < depJobsSize; i++){ //Job j : dependantJob.getDependency()
+
+                listOfDependants.add(dependantJob.getDependency().get(0));
+                dependantJob.listOfDependants.remove(dependantJob.getDependency().get(0));
             }
         }
 
