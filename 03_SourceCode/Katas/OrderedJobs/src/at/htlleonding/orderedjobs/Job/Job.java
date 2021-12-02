@@ -36,15 +36,12 @@ public class Job {
         if(listOfDependants == null) listOfDependants = new LinkedList<>();
         if(!containsDepJob(dependantJob)){
             listOfDependants.add(dependantJob);
-
-            if(dependantJob.getDependency() != null){
-                for(Job j : dependantJob.getDependency()){
-                    listOfDependants.add(j);
-                    dependantJob.listOfDependants.remove(j);
-                }
+        }
+        if(dependantJob.getDependency() != null){
+            for(Job j : dependantJob.getDependency()){
+                listOfDependants.add(j);
+                dependantJob.listOfDependants.remove(j);
             }
-
-
         }
 
         return added;
