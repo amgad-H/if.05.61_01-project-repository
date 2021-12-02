@@ -33,9 +33,18 @@ public class Job {
     public boolean addDependantJob(Job dependantJob){
         boolean added = false;
 
+        if(listOfDependants == null) listOfDependants = new LinkedList<>();
         if(!containsDepJob(dependantJob)){
-            if(listOfDependants == null) listOfDependants = new LinkedList<>();
             listOfDependants.add(dependantJob);
+
+            if(dependantJob.getDependency() != null){
+                for(Job j : dependantJob.getDependency()){
+                    listOfDependants.add(j);
+                    dependantJob.listOfDependants.remove(j);
+                }
+            }
+
+
         }
 
         return added;

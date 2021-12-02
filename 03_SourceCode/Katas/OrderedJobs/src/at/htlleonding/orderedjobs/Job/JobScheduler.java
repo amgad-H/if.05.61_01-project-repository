@@ -79,7 +79,13 @@ public class JobScheduler {
             }
             mJobs.add(job);
         }
+
         Job job2 = new Job(dependent);
         job.addDependantJob(job2);
+        for(Job j : mJobs){
+            if(j.getName() == job2.getName()){
+                mJobs.remove(j);
+            }
+        }
     }
 }
