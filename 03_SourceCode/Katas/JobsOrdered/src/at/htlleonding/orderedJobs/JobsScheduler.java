@@ -32,7 +32,7 @@ public class JobsScheduler {
     }
 
     public String getList() {
-        return "";
+        return mJobs.get().getName();
     }
 
     public void registerJob(String dependentJob, String independentJob) {

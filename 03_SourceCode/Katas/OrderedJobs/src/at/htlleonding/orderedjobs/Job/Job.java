@@ -8,7 +8,7 @@
  * Description:
  * ----------------------------------------------------------
  */
-package at.htlleonding.orderedjobs;
+package at.htlleonding.orderedjobs.Job;
 
 import java.util.LinkedList;
 import java.util.List;
