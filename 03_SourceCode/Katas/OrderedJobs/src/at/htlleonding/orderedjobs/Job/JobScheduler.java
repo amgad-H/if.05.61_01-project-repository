@@ -24,7 +24,7 @@ public class JobScheduler {
     }
 
     public void sort() {
-        bubbleSort();
+
     }
     public void bubbleSort() {
         int n = mJobs.size();
@@ -72,6 +72,11 @@ public class JobScheduler {
     public void registerJob(String dependent, String independent) {
         Job job = new Job(independent);
         if(!containsJob(job)){
+            for(Job j : mJobs){
+                if(j.containsDepJob(job)){
+                    j.changeDependantIntoIndependant(job);
+                }
+            }
             mJobs.add(job);
         }
         Job job2 = new Job(dependent);

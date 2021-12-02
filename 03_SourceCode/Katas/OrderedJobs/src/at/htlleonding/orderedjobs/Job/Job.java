@@ -29,10 +29,11 @@ public class Job {
     public List<Job> getDependency() {
         return listOfDependants;
     }
+
     public boolean addDependantJob(Job dependantJob){
         boolean added = false;
 
-        if(!ContainsDepJob(dependantJob)){
+        if(!containsDepJob(dependantJob)){
             if(listOfDependants == null) listOfDependants = new LinkedList<>();
             listOfDependants.add(dependantJob);
         }
@@ -40,7 +41,7 @@ public class Job {
         return added;
     }
 
-    boolean ContainsDepJob(Job job){
+    public boolean containsDepJob(Job job){
         boolean doesContain = false;
         if(listOfDependants != null){
             for(Job j : listOfDependants){
@@ -48,5 +49,18 @@ public class Job {
             }
         }
         return doesContain;
+    }
+
+    public boolean changeDependantIntoIndependant(Job job){
+        boolean changed = false;
+
+        for (Job j : listOfDependants){
+            if(j.getName() == job.getName()) {
+                listOfDependants.remove(j);
+                changed = true;
+            }
+        }
+
+        return changed;
     }
 }
