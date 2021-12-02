@@ -46,6 +46,11 @@ public class JobScheduler {
         String jobs = "";
         for(Job job : mJobs){
             jobs += job.getName();
+            if(job.getDependency() != null){
+                for(Job inJob : job.getDependency()){
+                    jobs += inJob.getName();
+                }
+            }
         }
         return jobs;
     }
@@ -55,6 +60,11 @@ public class JobScheduler {
 
         for(Job j : mJobs){
             if(j.getName() == job.getName()) doesContain = true;
+            if(job.getDependency() != null){
+                for(Job inJob : job.getDependency()){
+                   if(inJob.getName() == job.getName()) doesContain = true;
+                }
+            }
         }
         return doesContain;
     }
@@ -64,10 +74,7 @@ public class JobScheduler {
         if(!containsJob(job)){
             mJobs.add(job);
         }
-
-        Job job2 = new Job(dependent, job);
-        if(!containsJob(job2)){
-            mJobs.add(job2);
-        }
+        Job job2 = new Job(dependent);
+        job.addDependantJob(job2);
     }
 }
