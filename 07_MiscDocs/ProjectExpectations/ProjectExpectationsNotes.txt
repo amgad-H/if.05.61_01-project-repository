@@ -1,0 +1,32 @@
+Anforderungen:
+
+User Expectations:
+
+As a user I want to be able to enter due dates and informations for homework or other things into my timetable in order to have a much better overview over the next days and the incoming exercises.
+
+Also as a user I want to have an easy usable app for my mobile phone in order to use it whenever I want and wherever I am and to have an easy and fast access to it.
+
+As a user I want to use only one app for my homeworks, for my timetable and for my private plans instead of using 2 or more apps in order to be much faster and easier well informed about the next days weeks and months.
+
+As a user I also want to get regular reminders of what I have to do for the next days in order to stay up to date and plan ahead my next days.
+
+As a user I want to be able to use the school timetable as a class-planner in order to see the individually entered homeworks of a lesson by another classmate. 
+
+
+
+
+
+
+Admin Expectations:
+
+As an Admin I want to make it easier for students to get an overview over the next days, weeks or months in order to not forget about things and to have all upcoming plans clearly displayed in one app.
+
+As an Admin I want to be able to work with webuntis in order to sync the school timetables and to be able to see the canceled lessons or organizational events of the school on the class-planner.
+
+As an Admin I also want to give the users the opportunity to enter private events and plans into the timetable which can only be seen by the user himself.
+
+As an Admin I want to work with cloud backup services in order to be able to save changes and input and also to have access on the data in case of loosing the mobile phone or changing the device.
+
+ 
+
+
