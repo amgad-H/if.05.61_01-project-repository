@@ -1,0 +1,45 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Mathe SA",
+      "description": "Differenzialquotient",
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "title": "Deutsch SA",
+      "description": "Kommentar",
+      "categoryId": 2
+    },
+    {
+      "title": "nIX  spielen",
+      "description": "Samstag Plesching",
+      "categoryId": 3,
+      "id": 3
+    },
+    {
+      "title": "Fussball spielen",
+      "description": "Samstag Pichling",
+      "categoryId": 3,
+      "id": 4
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Mathematik",
+      "color": "red"
+    },
+    {
+        "id": 2,
+        "name": "Deutsch",
+        "color": "blue"
+      },
+      {
+        "id": 3,
+        "name": "Privat",
+        "color": "green"
+      }
+      ]
+}

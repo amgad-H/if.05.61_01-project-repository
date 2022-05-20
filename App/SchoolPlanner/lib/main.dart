@@ -1,3 +1,7 @@
+
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SchoolPlanner',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,6 +30,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'SchoolPlanner'),
     );
+
   }
 }
 
@@ -42,13 +47,16 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  String? _dropdownValue;
+
+  var child;
 
   void _incrementCounter() {
     setState(() {
@@ -60,25 +68,52 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  void _switchToMonthCalender(String? selectedValue){
+    setState(() {
+      _dropdownValue = selectedValue;
+    });
+  }
+
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)=>
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
+    Scaffold(
+      backgroundColor: /*Colors.white10*/ Colors.white12,
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
+        leading: FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Menu',
+          child: const Icon(Icons.menu),
+
+        ),
         title: Text(widget.title),
+        actions: [
+          DropdownButton(iconEnabledColor: Colors.white, dropdownColor: Colors.white, value: _dropdownValue, items: const [
+            DropdownMenuItem(child: Text('Weekly'),value: 'Weekly'),
+            DropdownMenuItem(child: Text('Monthly'), value: 'Monthly',)
+          ], onChanged: _switchToMonthCalender),
+        ],
+
+
       ),
-      body: Center(
+        body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+          child: Column(
+              children: const [
+
+                Text('Calendar will be shown here!', style: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22)),
+
+              ],
+        /*child: Column(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -97,19 +132,62 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
+              style: TextStyle(fontWeight: FontWeight.bold,
+                fontSize: 20),
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+
           ],
         ),
+        
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feed),
+            label: 'Feed',
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+            backgroundColor: Colors.blue,
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        child: const Icon(Icons.add),*/
+          ),
+        ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white12,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feed),
+            label: 'Feed',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+            backgroundColor: Colors.white,
+          ),
+        ],
+      ),// This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
 }
