@@ -1,15 +1,15 @@
-
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -52,28 +52,93 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  String? _dropdownValue;
+  String _dropdownValue;
 
   var child;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-  void _switchToMonthCalender(String? selectedValue){
+
+  CalendarFormat calendarFormat = CalendarFormat.week;
+  CalendarFormat _switchCalender(String selectedValue){
     setState(() {
       _dropdownValue = selectedValue;
     });
+    switch(selectedValue){
+      case 'Week':
+        calendarFormat = CalendarFormat.week;
+        break;
+
+      case 'Month':
+        calendarFormat = CalendarFormat.month;
+        break;
+    }
+    return calendarFormat;
   }
 
+
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+
+  String toDos = '';
+  bool anyToDos = false;
+
+  void _showToDos(int index){
+    if(index == 1){
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('ToDos'),
+            content: Text(toDos),
+            backgroundColor: Colors.blueAccent,
+            titleTextStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22, fontWeight: FontWeight.bold),
+            contentTextStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          )
+      );
+    }
+    else if(index == 2){
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Information'),
+            content: Text('- Maskenpflicht fällt im ganzen Schulgebäude weg!'),
+            backgroundColor: Colors.blueAccent,
+            titleTextStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22, fontWeight: FontWeight.bold),
+            contentTextStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          )
+      );
+    }
+  }
+
+  void _showToDosOfDay(){
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('ToDos'),
+            content: Text(toDos),
+            backgroundColor: Colors.blueAccent,
+            titleTextStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22, fontWeight: FontWeight.bold),
+            contentTextStyle: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          )
+      );
+  }
+
+  TextEditingController controller;
+
+  @override
+  void initState(){
+    super.initState();
+
+    controller = TextEditingController();
+  }
+
+  @override
+  void dispose(){
+    controller.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context)=>
@@ -84,110 +149,102 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     Scaffold(
-      backgroundColor: /*Colors.white10*/ Colors.white12,
+      backgroundColor: /*Colors.white10*/ Colors.white,
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        leading: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Menu',
-          child: const Icon(Icons.menu),
-
+        // the App.build method, and use it to set our appbar title.,
+        title: Image(
+          image: AssetImage('assets/SchoolPlanner_LOGO.jpeg'), height: 40,
         ),
-        title: Text(widget.title),
         actions: [
-          DropdownButton(iconEnabledColor: Colors.white, dropdownColor: Colors.white, value: _dropdownValue, items: const [
-            DropdownMenuItem(child: Text('Weekly'),value: 'Weekly'),
-            DropdownMenuItem(child: Text('Monthly'), value: 'Monthly',)
-          ], onChanged: _switchToMonthCalender),
+          DropdownButton(iconEnabledColor: Colors.white, alignment: Alignment.center, dropdownColor: Colors.blueAccent, value: _dropdownValue, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18), items: const [
+            DropdownMenuItem(child: Text('Week'), value: 'Week'),
+            DropdownMenuItem(child: Text('Month'), value: 'Month')
+          ], onChanged: _switchCalender),
         ],
 
 
       ),
-        body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-          child: Column(
-              children: const [
-
-                Text('Calendar will be shown here!', style: TextStyle(color: Colors.white, fontStyle: FontStyle.normal, fontSize: 22)),
-
-              ],
-        /*child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-              style: TextStyle(fontWeight: FontWeight.bold,
-                fontSize: 20),
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-
-          ],
+      body: TableCalendar(
+        startingDayOfWeek: StartingDayOfWeek.monday,
+        calendarStyle: CalendarStyle(
+          todayDecoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(5.0),
+            color: Colors.blueAccent
+          ),
+          selectedDecoration: BoxDecoration(
+            color: Colors.green
         ),
-        
+        ),
+        headerStyle: HeaderStyle(
+          formatButtonVisible: false,
+          titleCentered: true,
+        ),
+        onDaySelected: (DateTime selectedDay, DateTime focusedDay){
+          _showToDosOfDay();
+        },
+          onDayLongPressed: (DateTime selectedDay, DateTime focusedDay) async {
+            final toDo = await openDialog();
+            if(toDo == null || toDo.isEmpty) return;
+
+            setState(() => this.toDos = toDo);
+          },
+          focusedDay: DateTime.now(),
+          firstDay: DateTime(1990),
+          lastDay: DateTime(2050),
+          calendarFormat: calendarFormat,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feed),
-            label: 'Feed',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
-            backgroundColor: Colors.blue,
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),*/
-          ),
-        ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white12,
+        selectedItemColor: Colors.white,
+        onTap: (int Index){
+          _showToDos(Index);
+        },
+        backgroundColor: Colors.blueAccent,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
             backgroundColor: Colors.white,
+
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.feed),
-            label: 'Feed',
+            label: 'ToDos',
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
+            icon: Icon(Icons.info),
+            label: 'Info',
             backgroundColor: Colors.white,
           ),
         ],
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
+
+  Future<String> openDialog() => showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Enter your ToDos for this day'),
+        content: TextField(
+          decoration: InputDecoration(hintText: 'ToDos...'),
+          controller: controller,
+        ),
+        actions: [
+          TextButton(
+            onPressed: (){
+              addTodos();
+            },
+            child: Text('ADD'),
+          )
+        ],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      ),
+  );
+
+  void addTodos() {
+    Navigator.of(context).pop(controller.text);
+    anyToDos = true;
+    controller.clear();
+  }
 }
